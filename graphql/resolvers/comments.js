@@ -1,7 +1,7 @@
 const { AuthenticationError, UserInputError } = require('apollo-server');
 
-const Post = require('../../models/Post');
 const checkAuth = require('../../util/check-auth');
+const Post = require('../../models/Post');
 
 module.exports = {
     Mutation: {
@@ -29,7 +29,7 @@ module.exports = {
                 return post;
             } else throw new UserInputError('Post not found');
         },
-        deleteComment: async (_, { postId, commentId }, context) => {
+        async deleteComment(_, { postId, commentId }, context) {
             // First make sure we have a valid user by checking Auth
             const { username } = checkAuth(context);
             // Then find the post with the specific Id
@@ -56,4 +56,4 @@ module.exports = {
             }
         }
     }
-}
+};
